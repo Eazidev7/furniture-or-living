@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Furniture or Living</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="checkout.css?v=5" />
+</head>
+<body>
+  <nav class="nav">
+    <a class="nav__brand" href="index.html">
+      <svg viewBox="0 0 48 40" class="nav__logo" aria-hidden="true">
+        <path d="M4 20 L24 4 L44 20" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
+        <rect x="11" y="9" width="8" height="8" rx="1" fill="currentColor"/>
+        <line x1="15" y1="9" x2="15" y2="17" stroke="#fff" stroke-width="1.4"/>
+        <line x1="11" y1="13" x2="19" y2="13" stroke="#fff" stroke-width="1.4"/>
+        <path d="M13 34 v-6 a2 2 0 0 1 2-2 h10 a2 2 0 0 1 2 2 v1 h5 a2.4 2.4 0 0 1 2.4 2.4 V34 h-4 v-2 H18 v2 z" fill="currentColor"/>
+        <path d="M36 20 v8 M33 34 h6 M34 28 h4 l1 -8 h-6 z" fill="currentColor"/>
+      </svg>
+      <span>Furniture <em>or</em> Living</span>
+    </a>
+    <div class="nav__links">
+      <a href="index.html#collection">← Continue shopping</a>
+    </div>
+    <button class="nav__theme" data-theme-btn aria-label="Toggle dark mode">☾</button>
+  </nav>
+
+  <main class="checkout">
+    <h1 class="checkout__title">Checkout</h1>
+
+    <!-- empty state -->
+    <div class="checkout__empty" id="emptyState" hidden>
+      <p>Your cart is empty.</p>
+      <a class="btn btn--gold" href="index.html#collection">Browse the collection</a>
+    </div>
+
+    <!-- success state -->
+    <div class="checkout__empty" id="successState" hidden>
+      <h2>Order placed ✓</h2>
+      <p>Reference: <strong id="orderRef"></strong></p>
+      <p>We'll call/WhatsApp you shortly to confirm delivery details.</p>
+      <a class="btn btn--gold" href="index.html">Back to store</a>
+    </div>
+
+    <div class="checkout__grid" id="checkoutGrid" hidden>
+      <!-- order items -->
+      <section class="panel">
+        <h2 class="panel__title">Your order</h2>
+        <div id="orderItems"></div>
+        <div class="totals">
+          <div class="totals__row"><span>Subtotal</span><span id="subTotal">₦0</span></div>
+          <div class="totals__row totals__row--muted"><span>Delivery</span><span>Confirmed after order</span></div>
+          <div class="totals__row totals__row--grand"><span>Total</span><span id="grandTotal">₦0</span></div>
+        </div>
+      </section>
+
+      <!-- customer form -->
+      <section class="panel">
+        <h2 class="panel__title">Delivery details</h2>
+        <form id="orderForm" class="order-form">
+          <label>Full name <input type="text" name="name" required maxlength="120" /></label>
+          <label>Phone / WhatsApp <input type="text" name="contact" required maxlength="120" /></label>
+          <label>Delivery address <textarea name="address" rows="2" required maxlength="300"></textarea></label>
+          <label>Note (optional) <input type="text" name="note" maxlength="300" placeholder="e.g. call before delivery" /></label>
+
+          <fieldset class="pay">
+            <legend>Payment method</legend>
+            <label class="pay__opt"><input type="radio" name="payment" value="Pay on delivery" checked /> Pay on delivery</label>
+            <label class="pay__opt"><input type="radio" name="payment" value="Bank transfer" /> Bank transfer <small>(details sent after order)</small></label>
+          </fieldset>
+
+          <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" />
+          <button type="submit" class="btn btn--gold btn--big" id="placeOrderBtn">Place order</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <script src="config.js?v=5"></script>
+  <script src="checkout.js?v=5"></script>
+</body>
+</html>

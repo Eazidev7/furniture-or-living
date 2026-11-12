@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Furniture or Living</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css?v=5" />
+</head>
+<body>
+  <!-- ===== LOGIN ===== -->
+  <div class="login" id="loginView">
+    <form class="login__box" id="loginForm">
+      <h1 class="login__title">Furniture <em>or</em> Living</h1>
+      <p class="login__sub">Admin panel</p>
+      <input type="password" id="keyInput" placeholder="Admin passkey" autocomplete="current-password" required />
+      <button type="submit" class="btn">Sign in</button>
+      <p class="login__err" id="loginErr"></p>
+    </form>
+  </div>
+
+  <!-- ===== APP SHELL ===== -->
+  <div class="shell" id="appView" hidden>
+    <aside class="side">
+      <div class="side__brand">F<em>o</em>L Admin</div>
+      <nav class="side__nav">
+        <button class="side__link active" data-view="products">Products</button>
+        <button class="side__link" data-view="orders">Orders <span class="side__badge" id="ordBadge" hidden></span></button>
+        <button class="side__link" data-view="enquiries">Enquiries <span class="side__badge" id="enqBadge" hidden></span></button>
+        <button class="side__link" data-view="settings">Settings</button>
+      </nav>
+      <div class="side__foot">
+        <button class="side__link side__link--out" data-theme-btn data-label=" Theme">☾ Theme</button>
+        <a href="index.html" class="side__link side__link--out">← View store</a>
+        <button class="side__link side__link--out" id="logoutBtn">Log out</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <!-- PRODUCTS -->
+      <section class="view" id="view-products">
+        <div class="view__head">
+          <h2>Products</h2>
+          <button class="btn" id="addProductBtn">+ Add product</button>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th></th><th>Name</th><th>Price (₦)</th><th>Dimensions</th><th>Tag</th><th></th></tr></thead>
+            <tbody id="productRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ORDERS -->
+      <section class="view" id="view-orders" hidden>
+        <div class="view__head"><h2>Orders</h2></div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Date</th><th>Customer</th><th>Contact</th><th>Items</th><th>Total</th><th>Payment</th><th>Status</th><th></th></tr></thead>
+            <tbody id="orderRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ENQUIRIES -->
+      <section class="view" id="view-enquiries" hidden>
+        <div class="view__head"><h2>Enquiries</h2></div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Date</th><th>Name</th><th>Contact</th><th>Product</th><th>Message</th><th></th></tr></thead>
+            <tbody id="enquiryRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="view" id="view-settings" hidden>
+        <div class="view__head"><h2>Settings</h2></div>
+        <div class="settings">
+          <div class="settings__block">
+            <h3>Storefront</h3>
+            <label>Hero image
+              <div class="imgpick">
+                <img id="heroPreview" src="images/hero.jpg" alt="Hero" />
+                <label class="btn btn--ghost btn--sm">Upload new
+                  <input type="file" id="heroFile" accept="image/*" hidden />
+                </label>
+              </div>
+            </label>
+            <label>WhatsApp number <input type="text" id="setWhatsapp" placeholder="e.g. 2348012345678" /></label>
+            <label>Footer tagline <input type="text" id="setTagline" placeholder="Your home deserves better." /></label>
+            <button class="btn btn--sm" id="saveSettingsBtn">Save settings</button>
+          </div>
+          <div class="settings__block">
+            <h3>Security</h3>
+            <label>New admin passkey <input type="password" id="newKey" placeholder="Min. 8 characters" /></label>
+            <button class="btn btn--sm" id="changeKeyBtn">Change passkey</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===== PRODUCT FORM MODAL ===== -->
+  <div class="modal" id="productModal" hidden>
+    <div class="modal__box">
+      <button class="modal__close" id="productClose">×</button>
+      <h3 id="productModalTitle">Add product</h3>
+      <form id="productForm" class="form">
+        <div class="imgpick imgpick--wide">
+          <img id="imgPreview" src="" alt="" />
+          <label class="btn btn--ghost btn--sm">Choose image
+            <input type="file" id="imgFile" accept="image/*" hidden />
+          </label>
+        </div>
+        <input type="hidden" id="fImg" />
+        <div class="form__row">
+          <label>Name <input type="text" id="fName" required maxlength="160" /></label>
+          <label>Price (₦) <input type="number" id="fPrice" min="0" step="500" required /></label>
+        </div>
+        <div class="form__row">
+          <label>Dimensions <input type="text" id="fDims" placeholder="100 × 60 × 35 cm" maxlength="80" /></label>
+          <label>Tag <input type="text" id="fTag" placeholder="e.g. Best seller" maxlength="40" /></label>
+        </div>
+        <button type="submit" class="btn" id="productSaveBtn">Save product</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="config.js?v=5"></script>
+  <script src="admin.js?v=5"></script>
+</body>
+</html>

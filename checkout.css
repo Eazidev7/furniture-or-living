@@ -1,0 +1,81 @@
+/* ============================= CHECKOUT ============================= */
+[hidden] { display: none !important; }
+.checkout { max-width: 1100px; margin: 0 auto; padding: 110px clamp(18px, 4vw, 40px) 80px; }
+.checkout__title { font-family: var(--font-head); font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 30px; }
+
+.checkout__empty {
+  background: var(--card); border-radius: var(--radius); padding: 60px 30px;
+  text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px;
+  border: 1px solid rgba(60,45,25,.08);
+}
+.checkout__empty h2 { font-family: var(--font-head); }
+.checkout__empty p { color: var(--ink-soft); }
+
+.checkout__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: start; }
+
+.panel {
+  background: var(--card); border-radius: var(--radius); padding: 26px;
+  border: 1px solid rgba(60,45,25,.08);
+  box-shadow: 0 12px 30px -18px rgba(60,45,25,.3);
+}
+.panel__title { font-family: var(--font-head); font-size: 1.3rem; margin-bottom: 18px; }
+
+/* ---------- items ---------- */
+.item {
+  display: grid; grid-template-columns: 74px 1fr auto; gap: 14px; align-items: center;
+  padding: 14px 0; border-bottom: 1px solid rgba(60,45,25,.08);
+}
+.item:last-of-type { border-bottom: none; }
+.item__img { width: 74px; height: 56px; object-fit: cover; border-radius: 9px; background: #e9dfcd; }
+.item__name { font-weight: 600; font-size: .95rem; }
+.item__finish { font-size: .78rem; color: var(--gold-deep); font-weight: 600; }
+.item__price { font-size: .85rem; color: var(--ink-soft); margin-top: 3px; }
+.item__right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.item__line { font-weight: 700; }
+.qty { display: flex; align-items: center; gap: 10px; }
+.qty button {
+  width: 26px; height: 26px; border-radius: 8px; font-weight: 700;
+  border: 1.5px solid rgba(60,45,25,.25); transition: all .15s;
+}
+.qty button:hover { border-color: var(--gold); background: rgba(176,127,60,.1); }
+.item__remove { font-size: .74rem; color: #a33c2e; opacity: .85; }
+.item__remove:hover { opacity: 1; text-decoration: underline; }
+
+/* ---------- totals ---------- */
+.totals { margin-top: 14px; padding-top: 16px; border-top: 1.5px solid rgba(60,45,25,.12); }
+.totals__row { display: flex; justify-content: space-between; padding: 5px 0; font-size: .95rem; }
+.totals__row--muted { color: var(--ink-soft); font-size: .82rem; }
+.totals__row--grand { font-weight: 700; font-size: 1.2rem; color: var(--gold-deep); margin-top: 6px; }
+
+/* ---------- form ---------- */
+.order-form { display: flex; flex-direction: column; gap: 14px; }
+.order-form label { display: flex; flex-direction: column; gap: 6px; font-size: .82rem; font-weight: 600; color: var(--ink-soft); }
+.order-form input, .order-form textarea {
+  font: inherit; font-size: .93rem; font-weight: 400; color: var(--ink);
+  padding: 12px 14px; border: 1.5px solid rgba(60,45,25,.2); border-radius: 10px; background: #fff;
+}
+.order-form input:focus, .order-form textarea:focus { outline: none; border-color: var(--gold); }
+.pay { border: none; display: flex; flex-direction: column; gap: 9px; padding: 4px 0; }
+.pay legend { font-size: .82rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 8px; }
+.pay__opt {
+  flex-direction: row !important; align-items: center; gap: 10px;
+  font-size: .92rem !important; font-weight: 500 !important; color: var(--ink) !important;
+  padding: 12px 14px; border: 1.5px solid rgba(60,45,25,.18); border-radius: 10px; cursor: pointer;
+}
+.pay__opt small { color: var(--ink-soft); font-weight: 400; }
+.pay__opt input { width: auto; accent-color: var(--gold-deep); }
+
+/* ---------- dark mode ---------- */
+[data-theme="dark"] .panel,
+[data-theme="dark"] .checkout__empty { border-color: rgba(240,225,200,.12); }
+[data-theme="dark"] .item { border-bottom-color: rgba(240,225,200,.08); }
+[data-theme="dark"] .totals { border-top-color: rgba(240,225,200,.16); }
+[data-theme="dark"] .order-form input,
+[data-theme="dark"] .order-form textarea { background: #2c231a; border-color: rgba(240,225,200,.2); }
+[data-theme="dark"] .pay__opt { border-color: rgba(240,225,200,.2); }
+[data-theme="dark"] .qty button { border-color: rgba(240,225,200,.25); }
+[data-theme="dark"] .item__img { background: #33291e; }
+
+@media (max-width: 800px) {
+  .checkout__grid { grid-template-columns: 1fr; }
+}
